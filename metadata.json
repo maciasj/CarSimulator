@@ -1,0 +1,5 @@
+{
+  "name": "DriveSim Pro: Car Interaction Simulator",
+  "description": "An immersive static car simulator where you can control environmental conditions like day/night and rain, as well as vehicle functions like headlights, wipers, and hazard signals.",
+  "requestFramePermissions": []
+}

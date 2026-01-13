@@ -1,0 +1,36 @@
+{
+  "view": "front",
+  "isNight": true,
+  "isEngineOn": true,
+  "isEngineBroken": false,
+  "isOilLeaking": false,
+  "isBatteryDead": false,
+  "isFuelEmpty": false,
+  "isWiperBroken": false,
+  "parkingLightsOn": true,
+  "lightsOn": true,
+  "highBeamOn": false,
+  "fogLightsOn": false,
+  "hazardLightsOn": false,
+  "leftSignalOn": true,
+  "rightSignalOn": false,
+  "isRaining": true,
+  "wipersActive": true,
+  "wiperSpeed": "low",
+  "isWashing": false,
+  "interiorLightOn": false,
+  "isHornActive": false,
+  "isHoodOpen": false,
+  "isTrunkOpen": false,
+  "windowsDown": false,
+  "doorsOpen": {
+    "left": false,
+    "right": false
+  },
+  "tires": {
+    "fl": true,
+    "fr": false,
+    "rl": false,
+    "rr": false
+  }
+}

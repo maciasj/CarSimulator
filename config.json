@@ -1,0 +1,36 @@
+{
+  "project": "DriveSim Pro: Car Interaction Simulator",
+  "type": "React + TypeScript + Vite",
+  "setup": {
+    "nodeVersion": ">=16.0.0",
+    "packageManager": "npm"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "lucide-react": "^0.562.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  },
+  "environment": {
+    "VITE_GEMINI_API_KEY": "your_api_key_here"
+  },
+  "server": {
+    "port": 3000,
+    "host": "0.0.0.0"
+  },
+  "backend": {
+    "enabled": true,
+    "url": "http://localhost:5000/status",
+    "pollIntervalMs": 500
+  }
+}
