@@ -50,6 +50,9 @@ function getDefaultState() {
     isBatteryDead: false,
     isFuelEmpty: false,
     isWiperBroken: false,
+    rpm: 0,
+    temperature: 90,
+    speed: 0,
   };
 }
 

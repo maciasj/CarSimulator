@@ -7,16 +7,16 @@
   "isBatteryDead": false,
   "isFuelEmpty": false,
   "isWiperBroken": false,
-  "parkingLightsOn": true,
+  "parkingLightsOn": false,
   "lightsOn": true,
-  "highBeamOn": false,
+  "highBeamOn": true,
   "fogLightsOn": false,
   "hazardLightsOn": false,
   "leftSignalOn": true,
-  "rightSignalOn": false,
+  "rightSignalOn": true,
   "isRaining": true,
   "wipersActive": true,
-  "wiperSpeed": "low",
+  "wiperSpeed": "high",
   "isWashing": false,
   "interiorLightOn": false,
   "isHornActive": false,
@@ -28,9 +28,12 @@
     "right": false
   },
   "tires": {
-    "fl": true,
+    "fl": false,
     "fr": false,
     "rl": false,
     "rr": false
-  }
+  },
+  "rpm": 2600,
+  "temperature": 90,
+  "speed": 15
 }

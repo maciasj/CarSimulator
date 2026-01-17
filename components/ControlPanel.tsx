@@ -83,7 +83,13 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ state, dispatch }) => {
           <>
             <button 
               disabled={state.isEngineBroken}
-              onClick={() => handleDispatch({ type: 'TOGGLE_ENGINE' }, { isEngineOn: !state.isEngineOn })} 
+              onClick={() => handleDispatch(
+                { type: 'TOGGLE_ENGINE' }, 
+                { 
+                  isEngineOn: !state.isEngineOn,
+                  ...(state.isEngineOn ? { rpm: 0, speed: 0, temperature: 90 } : {})
+                }
+              )} 
               className={`${btnBaseClass} ${getBtnColorClasses(state.isEngineOn, 'red')} ${state.isEngineBroken ? 'opacity-50 cursor-not-allowed grayscale' : ''}`}
             >
               <Power className={state.isEngineOn ? "animate-pulse" : ""} size={24} />
@@ -176,6 +182,71 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ state, dispatch }) => {
             </button>
           </>
         )}
+      </div>
+
+      {/* Performance Controls */}
+      <div className="mt-4 pt-4 border-t border-white/5">
+        <h3 className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-3">
+          Performance Controls
+        </h3>
+        
+        <div className="grid grid-cols-3 gap-3">
+          {/* RPM */}
+          <div className="space-y-2">
+            <label className={`text-[8px] font-black uppercase ${state.isEngineOn ? 'text-slate-500' : 'text-slate-600 opacity-50'}`}>RPM</label>
+            <input 
+              type="range" 
+              min="0" 
+              max="8000" 
+              step="100"
+              value={state.rpm}
+              onChange={(e) => handleDispatch(
+                { type: 'SET_RPM', payload: parseInt(e.target.value) },
+                { rpm: parseInt(e.target.value) }
+              )}
+              disabled={!state.isEngineOn}
+              className={`w-full h-2 rounded-lg appearance-none cursor-pointer accent-blue-500 ${state.isEngineOn ? 'bg-slate-700' : 'bg-slate-800 opacity-50 cursor-not-allowed'}`}
+            />
+            <div className={`text-[9px] font-mono text-center ${state.isEngineOn ? 'text-blue-400' : 'text-slate-600'}`}>{state.rpm}</div>
+          </div>
+
+          {/* Speed */}
+          <div className="space-y-2">
+            <label className={`text-[8px] font-black uppercase ${state.isEngineOn ? 'text-slate-500' : 'text-slate-600 opacity-50'}`}>Speed</label>
+            <input 
+              type="range" 
+              min="0" 
+              max="200" 
+              step="5"
+              value={state.speed}
+              onChange={(e) => handleDispatch(
+                { type: 'SET_SPEED', payload: parseInt(e.target.value) },
+                { speed: parseInt(e.target.value) }
+              )}
+              disabled={!state.isEngineOn}
+              className={`w-full h-2 rounded-lg appearance-none cursor-pointer accent-green-500 ${state.isEngineOn ? 'bg-slate-700' : 'bg-slate-800 opacity-50 cursor-not-allowed'}`}
+            />
+            <div className={`text-[9px] font-mono text-center ${state.isEngineOn ? 'text-green-400' : 'text-slate-600'}`}>{state.speed} km/h</div>
+          </div>
+
+          {/* Temperature */}
+          <div className="space-y-2">
+            <label className={`text-[8px] font-black uppercase text-slate-500`}>Temp</label>
+            <input 
+              type="range" 
+              min="50" 
+              max="170" 
+              step="5"
+              value={state.temperature}
+              onChange={(e) => handleDispatch(
+                { type: 'SET_TEMPERATURE', payload: parseInt(e.target.value) },
+                { temperature: parseInt(e.target.value) }
+              )}
+              className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-red-500"
+            />
+            <div className="text-[9px] text-red-400 font-mono text-center">{state.temperature}°C</div>
+          </div>
+        </div>
       </div>
     </div>
   );

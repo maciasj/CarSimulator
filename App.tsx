@@ -45,7 +45,10 @@ const initialState: CarState = {
   isTrunkOpen: false,
   windowsDown: false,
   doorsOpen: { left: false, right: false },
-  tires: { fl: false, fr: false, rl: false, rr: false }
+  tires: { fl: false, fr: false, rl: false, rr: false },
+  rpm: 0,
+  temperature: 90,
+  speed: 0
 };
 
 function carReducer(state: CarState, action: ControlAction): CarState {
@@ -64,10 +67,13 @@ function carReducer(state: CarState, action: ControlAction): CarState {
       return { 
         ...state, 
         isEngineOn: newEngineState,
+        rpm: newEngineState ? state.rpm : 0,
+        speed: newEngineState ? state.speed : 0,
+        temperature: newEngineState ? state.temperature : 90,
         ...(newEngineState ? {} : { leftSignalOn: false, rightSignalOn: false, hazardLightsOn: false })
       };
     case 'BREAK_ENGINE':
-      return { ...state, isEngineBroken: true, isEngineOn: false };
+      return { ...state, isEngineBroken: true, isEngineOn: false, rpm: 0, speed: 0, temperature: 90 };
     case 'REPAIR_ENGINE':
       return { ...state, isEngineBroken: false };
     case 'TOGGLE_OIL_LEAK':
@@ -84,7 +90,7 @@ function carReducer(state: CarState, action: ControlAction): CarState {
       return { 
         ...state, 
         isFuelEmpty: noFuel,
-        ...(noFuel ? { isEngineOn: false } : {})
+        ...(noFuel ? { isEngineOn: false, rpm: 0, speed: 0, temperature: 90 } : {})
       };
     case 'TOGGLE_WIPER_BREAK':
       return { ...state, isWiperBroken: !state.isWiperBroken };
@@ -152,6 +158,16 @@ function carReducer(state: CarState, action: ControlAction): CarState {
           [action.payload]: !state.tires[action.payload] 
         } 
       };
+    case 'SET_RPM':
+      // Solo permite cambiar RPM si el motor está encendido
+      if (!state.isEngineOn) return state;
+      return { ...state, rpm: action.payload };
+    case 'SET_TEMPERATURE':
+      return { ...state, temperature: action.payload };
+    case 'SET_SPEED':
+      // Solo permite cambiar velocidad si el motor está encendido
+      if (!state.isEngineOn) return state;
+      return { ...state, speed: action.payload };
     default:
       return state;
   }

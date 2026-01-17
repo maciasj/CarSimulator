@@ -34,6 +34,9 @@ export interface CarState {
     rl: boolean;
     rr: boolean;
   };
+  rpm: number;
+  temperature: number;
+  speed: number;
 }
 
 export type ControlAction = 
@@ -63,4 +66,7 @@ export type ControlAction =
   | { type: 'TOGGLE_TRUNK' }
   | { type: 'TOGGLE_WINDOWS' }
   | { type: 'TOGGLE_DOOR', payload: 'left' | 'right' }
-  | { type: 'TOGGLE_TIRE', payload: 'fl' | 'fr' | 'rl' | 'rr' };
+  | { type: 'TOGGLE_TIRE', payload: 'fl' | 'fr' | 'rl' | 'rr' }
+  | { type: 'SET_RPM', payload: number }
+  | { type: 'SET_TEMPERATURE', payload: number }
+  | { type: 'SET_SPEED', payload: number };
